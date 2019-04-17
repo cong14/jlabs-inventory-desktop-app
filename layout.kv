@@ -1,0 +1,1501 @@
+#:import la kivy.adapters.listadapter
+#:import da kivy.adapters.dictadapter
+#:import factory kivy.factory
+
+<LookupErrorPopup>:
+    title: "Error"
+    size_hint: None, None
+    size: 350, 175
+    auto_dismiss: False
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            size_hint: 1, 1
+            text: "Please enter a valid JLab."
+        Button:
+            size_hint: 1,.75
+            text: "Return"
+            on_release: root.dismiss()
+
+<CsvErrorPopup>:
+    id: quitProgram
+    title: 'File Not Saved'
+    size_hint: None, None
+    size: 400, 150
+    auto_dismiss: False
+    BoxLayout:
+        size_hint: 1, 1
+        orientation: 'vertical'
+        Label:
+            size_hint: 1, .5
+            text: "(NOTE: All report files must have a \'.csv\' extension)"
+        Button:
+            size_hint: 1, .5
+            text: "Return to Reports"
+            on_release: root.dismiss()
+
+<NoSelectionErrorPopup>:
+    id: quitProgram
+    title: "Error"
+    size_hint: None, None
+    size: 600, 200
+    auto_dismiss: False
+    BoxLayout:
+        size_hint: 1, 0.9
+        orientation: 'vertical'
+        Label:
+            size_hint: 1, 1.5
+            text: "You must select at least one jlab and at least one field. No file created"
+        Button:
+            size_hint: 1, 1
+            text: "Return to Reports"
+            on_release: root.dismiss()
+
+<NoFilenameErrorPopup>:
+    id: quitProgram
+    title: "Error"
+    size_hint: None, None
+    size: 600, 200
+    auto_dismiss: False
+    BoxLayout:
+        size_hint: 1, 0.9
+        orientation: 'vertical'
+        Label:
+            size_hint: 1, 1.5
+            text: "You didn't enter a filename. No file created."
+        Button:
+            size_hint: 1, 1
+            text: "Return to Reports"
+            on_release: root.dismiss()
+
+<ErrorQuotesPopup>:
+    id: eqpop
+    title: "Oops!"
+    size_hint: None, None
+    size: 400,130
+    BoxLayout:
+        size_hint: 1,1
+        orientation: 'vertical'
+        Label:
+            halign: 'center'
+            text: 'Quotation marks (i.e. \") are not allowed in input fields.'
+        Label:
+            halign: 'center'
+            text: ''
+
+<ClearSelection>:
+    id: clear
+    title: "This will clear ALL selections on the page. Are you sure?"
+    size_hint: None, None
+    size: 400, 100
+    auto_dismiss: False
+    BoxLayout:
+        size_hint: 1, 0.9
+        orientation: 'horizontal'
+        Button:
+            size_hint: 1, 1
+            text: "Okay"
+            on_press: root.yes = True
+            on_release: root.dismiss()
+        Button:
+            size_hint: 1, 1
+            text: "Cancel"
+            on_release: root.dismiss()
+<SelOwner>:
+    title: "Please select an Owner"
+    size_hint: None, None
+    size: 400, 100
+    auto_dismiss: False
+    BoxLayout:
+        size_hint: 1, 0.9
+        orientation: 'horizontal'
+        Button:
+            size_hint: 1, 1
+            text: "Okay"
+            on_release: root.dismiss()
+<EmptyOwner>:
+    title: "Please enter owner's name."
+    size_hint: None, None
+    size: 400, 100
+    auto_dismiss: False
+    BoxLayout:
+        size_hint: 1, 0.9
+        orientation: 'horizontal'
+        Button:
+            size_hint: 1, 1
+            text: "Okay"
+            on_release: root.dismiss()
+<InvalidJLabPopup>:
+    id: invlid
+    title: "JLab name is already in use, would you like to override it?"
+    size_hint: None, None
+    size: 400, 100
+    auto_dismiss: False
+    BoxLayout:
+        size_hint: 1, 0.9
+        orientation: 'horizontal'
+        Button:
+            size_hint: 1, 1
+            text: "Yes"
+            on_press: root.overT()
+            on_release: root.dismiss()
+        Button:
+            size_hint: 1, 1
+            text: "Cancel"
+            on_release: root.dismiss()
+
+<InactiveLink>:
+    title: 'You cannot add a machine to an inactive JLab'
+    size_hint: None, None
+    size: 400,100
+
+<StatusPopup>:
+    id: statpop
+    title: "JLab name is already in use, would you like to override it?"
+    size_hint: None, None
+    size: 400, 125
+    auto_dismiss: False
+    BoxLayout:
+        size_hint: 1, 0.9
+        orientation: 'horizontal'
+        Button:
+            size_hint: 1, 1
+            text: "Yes"
+            on_press: root.changeStatus()
+            on_release: root.dismiss()
+        Button:
+            size_hint: 1, 1
+            text: "Cancel"
+            on_release: root.dismiss()
+
+<QuitPopup>:
+    id: quitProgram
+    title: "Exit program?"
+    size_hint: None, None
+    size: 400, 100
+    auto_dismiss: False
+    BoxLayout:
+        size_hint: 1, 0.9
+        orientation: 'horizontal'
+        Button:
+            size_hint: 1, 1
+            text: "Yes"
+            on_release: root.quitScreen()
+        Button:
+            size_hint: 1, 1
+            text: "Cancel"
+            on_release: root.dismiss()
+
+<ErrorPopup>:
+    id: errorPopup
+    title: 'Error'
+    size_hint: None,None
+    size: 400,200
+    auto_dismiss: False
+    BoxLayout:
+        size_hint: 1,0.8
+        orientation: 'vertical'
+        Label:
+            id: epmsg
+            text:'Please enter valid range'
+            text_size: self.width, None
+            height: self.texture_size[1]
+            halign: 'center'
+        Button:
+            size_hint: 1,.5
+            text: 'Dismiss'
+            on_release: root.dismiss()
+
+<ConfPopup>:
+    id: confPopup
+    title: 'No Changed Made to Database'
+    size_hint: None,None
+    auto_dismiss: True
+    BoxLayout:
+        size_hint: 1,0.9
+        orientation: 'vertical'
+        Label:
+            text: ''
+            text_size: self.width, None
+            height: self.texture_size[1]
+            halign: 'center'
+
+<ErrorResetPopup>:
+    id: errResPopup
+    title: ''
+    size_hint: None,None
+    size: 450,300
+    auto_dismiss: True
+    BoxLayout:
+        size_hint: 1,.9
+        orientation: 'vertical'
+        ScrollView:
+            size_hint: 1,.6
+            bar_width: 5
+            Label:
+                padding: (10,10)
+                size_hint_y: None
+                height: self.texture_size[1]
+                text_size: self.width, None
+                text: ''
+        Button:
+            text: 'Go Back to Edit Changes'
+            size_hint: 1,.2
+            on_press: root.dismiss()
+        Button:
+            text: 'Reset Attempted Changes'
+            size_hint: 1,.2
+            on_release: root.dismiss()
+
+<OwnerScrollPopup>
+    id: ownErrPopup
+    title: 'Error(s)'
+    size_hint: None,None
+    size: 450,150
+    auto_dismiss: True
+    BoxLayout:
+        size_hint: 1,1
+        orientation: 'vertical'
+        ScrollView:
+            size_hint: 1,1
+            bar_width: 5
+            Label:
+                padding: (10,10)
+                size_hint_y: None
+                height: self.texture_size[1]
+                text_size: self.width, None
+                text: ''
+
+<AddLabPopup>:
+    id:addLab
+    title: "JLab Added"
+    size_hint: None,None
+    size: 400,300
+    auto_dismiss: False
+    BoxLayout:
+        size_hint: 1, 0.9
+        orientation: 'vertical'
+        Button:
+            size_hint: 1, 1
+            text: "Add Machines to JLab"
+            on_press:
+                root.dismiss()
+        Button:
+            size_hint: 1,1
+            text: 'Add Another JLab'
+            on_press:
+                root.dismiss()
+        Button:
+            size_hint: 1, 1
+            text: "Back to Menu"
+            on_release:
+                root.dismiss()
+                root.goToMenu()
+
+<AddOwnerPopup>
+    id: AddOwner
+    title: "New Owner Info"
+    size_hint: None,None
+    size: 500,400
+    auto_dismiss: False
+    BoxLayout:
+        orientation: 'vertical'
+        id: box11
+        size_hint: 1,1
+        BoxLayout:
+            BoxLayout:
+                size_hint: 1,.9
+                id: box22
+                orientation: 'vertical'
+                on: root.createLayout(box22)
+        BoxLayout:
+            size_hint: 1, .2
+            Button:
+                id: add_owner
+                text: 'Add Owner'
+                on_press:
+                    root.useInputs(box22)
+                    root.dismiss()
+                    root.clearInputs(box22)
+            Button:
+                text: 'Cancel'
+                on_release:
+                    root.wipe()
+                    root.dismiss()
+
+<OwnerPopup>
+    id: Owner
+    title: "Select Owner"
+    size_hint: None,None
+    size: 500,600
+    auto_dismiss: False
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: 1, .15
+            TextInput:
+                id: user_inp
+                text: ""
+                write_tab: False
+                multiline: False
+            Button:
+                text: 'Filter'
+                on_release:
+                    root.filterOwners()
+        ScrollView:
+            size_hint: 1,1
+            OwnerSelectableGrid:
+                on: self.make_owner_buttons(grid)
+                # size: (400,1000)
+                size_hint: 1, None
+                cols: 1
+                touch_multiselect: False
+                multiselect: False
+                id: grid
+        Button:
+            size_hint: 1, .15
+            text: 'Select'
+            background_color: (.75, .75, .75, 1.0)
+            on_release:
+                root.changeNameProgram()
+                root.dismiss()
+        Button:
+            size_hint: 1, .15
+            text: 'Edit Owner Info & Select'
+            background_color: (.75, .75, .75, 1.0)
+            on_release:
+                root.editOwner(grid)
+        Label:
+            size_hint: 1,.05
+        Button:
+            size_hint: 1, .15
+            text: 'Set Owner to None'
+            background_color: (.75, .75, .75, 1.0)
+            on_release:
+                root.noOwner()
+                root.dismiss()
+        Button:
+            size_hint: 1, .15
+            text: 'Create New Owner'
+            background_color: (.75, .75, .75, 1.0)
+            on_release:
+                root.addOwnerProgram()
+                root.dismiss()
+        Button:
+            size_hint: 1,.15
+            text: 'Cancel'
+            background_color: (.75, .75, .75, 1.0)
+            on_release:
+                root.wipe()
+                root.dismiss()
+
+<FilePopup>:
+    size_hint: None,None
+    size: 400,100
+    BoxLayout:
+        size_hint: 1,.9
+        Button:
+            text: 'Ok'
+            size_hint: 1,1
+            on_release: root.dismiss()
+
+<OwnerPopup2>
+    id: Owner
+    title: "Select Owner"
+    size_hint: None,None
+    size: 500,600
+    auto_dismiss: False
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: 1, .15
+            TextInput:
+                id: user_inp
+                text: ""
+                write_tab: False
+                multiline: False
+            Button:
+                text: 'Filter'
+                on_release:
+                    root.filterOwners()
+        ScrollView:
+            size_hint: 1,1
+            OwnerSelectableGrid:
+                size: (400,500)
+                size_hint: 1, None
+                cols: 1
+                touch_multiselect: False
+                multiselect: False
+                id: grid
+                on: self.make_owner_buttons(grid)
+        Button:
+            size_hint: 1, .15
+            text: 'Select'
+            background_color: (.75, .75, .75, 1.0)
+            on_release:
+                root.ChangeNameProgram()
+                root.dismiss()
+        Label:
+            size_hint: 1, .05
+        Button:
+            size_hint: 1, .15
+            text: 'Set Owner to None'
+            background_color: (.75, .75, .75, 1.0)
+            on_release:
+                root.noOwner()
+                root.dismiss()
+        Button:
+            size_hint: 1,.15
+            text: 'Cancel'
+            background_color: (.75, .75, .75, 1.0)
+            on_release:
+                root.wipe()
+                root.dismiss()
+<MachineOwnerPopup>:
+    size_hint: None, None
+    title: "COMPANY CONTACT"
+    size: 500,400
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            id: mOwnerPopup
+            Label:
+                text: 'Name:'
+            Label:
+                text: ''
+        BoxLayout:
+            Label:
+                text: 'Phone:'
+            Label:
+                text: ''
+        BoxLayout:
+            Label:
+                text: 'Email:'
+            Label:
+                text: ''
+        BoxLayout:
+            Button:
+                text: 'Edit Contact Info'
+                on_press:
+                    root.edit_contact()
+
+<MenuButton>:
+    size_hint_y: None
+    height: dp(24)
+
+<TreeViewCBNode>:
+    size: 10, 25
+    text_size: root.width, root.height
+    valign: 'middle'
+    halign: 'left'
+    align: 'right'
+    size_hint_x: 1.6
+    id: tvcbn
+    on_press:
+        root.updateChildren()
+    on_active:
+        root.selected_cbs(tvcbn)
+
+<MyTreeView>:
+    on: root.create_tree()
+
+<Tooltip>:
+    size_hint: None,None
+    size: self.texture_size[0]+5, self.texture_size[1]+5
+    canvas.before:
+        Color:
+            rgb: .25,.25,.25
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<ChangeLinkPopup>:
+    id: link
+    title: "Select Jlab for this machine to be linked to"
+    size_hint: None,None
+    size: 500,600
+    auto_dismiss: False
+    BoxLayout:
+        orientation: 'vertical'
+        ScrollView:
+            size_hint: 1,1
+            SelectableGrid:
+                size: (400,500)
+                size_hint: 1, None
+                cols: 1
+                touch_multiselect: True
+                multiselect: False
+                id: grid
+                on: self.make_buttons(grid)
+        Button:
+            size_hint: 1, .15
+            text: 'Select'
+            background_color: (.75, .75, .75, 1.0)
+            on_release:
+                root.edit_link()
+                #root.dismiss()
+        Label:
+            size_hint: 1, .05
+        Button:
+            size_hint: 1, .15
+            text: 'Move to Unattached Machines'
+            background_color: (.75, .75, .75, 1.0)
+            on_release:
+                root.unlink()
+                root.dismiss()
+        Button:
+            size_hint: 1,.15
+            text: 'Cancel'
+            background_color: (.75, .75, .75, 1.0)
+            on_release:
+                root.dismiss()
+
+<SelectJLabPopup>:
+    id: selO
+    title: "Please select a Jlab"
+    size_hint: None, None
+    size: 400,100
+    auto_dismiss: False
+    BoxLayout:
+        spacing: 10
+        Button:
+            text: "Dismiss"
+            on_release: root.dismiss()
+
+<CheckPopup>:
+    title: 'Please check boxes and enter information for sections you wish to search'
+    size_hint: None, None
+    size: 400,100
+
+
+<WelcomeBoxLayout>
+    padding: 30,10,30,10
+    canvas.before:
+        Color:
+            rgba: 1,1,1,.2
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<FileCreatedPopup>:
+    title: 'File Created'
+    size_hint: None, None
+    size: 200,100
+
+<SaveDialog>
+    title: "Save Report As"
+    size_hint: None,None
+    size: 700,500
+    auto_dismiss: False
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: 1,1
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 1, .1
+            Label:
+                text: "Please use a \'.csv\' extension.  Single-click to enter folder.  Double-click to choose file."
+                italic: True
+        BoxLayout:
+            orientation: 'vertical'
+            BoxLayout:
+                size_hint: .5, .15
+                size_hint_y: None
+                height: sp(40)
+                ToggleButton:
+                    group: 'fileview'
+                    allow_no_selection: False
+                    state: 'down'
+                    size_hint: .5,1
+                    text: 'Icon View'
+                    background_normal: ''
+                    background_color: (.2,.2,.2,1)
+                    on_press: filechooser.view_mode = 'icon'
+                ToggleButton:
+                    group: 'fileview'
+                    allow_no_selection: False
+                    size_hint: .5,1
+                    text: 'List View'
+                    background_normal: ''
+                    background_color: (.2,.2,.2,1)
+                    on_press: filechooser.view_mode = 'list'
+            WelcomeBoxLayout:
+                padding: 15
+                FileChooser:
+                    id: filechooser
+                    rootpath: root.set_rootpath(filechooser)
+                    FileChooserIconLayout:
+                        on_submit: text_input.text = filechooser.selection[0] or ''
+                    FileChooserListLayout:
+                        on_submit: text_input.text = filechooser.selection[0] or ''
+                        halign: 'left'
+        BoxLayout:
+            padding: 0,30,0,0
+            size_hint: 1, .1
+            size_hint_y: None
+            height: 30
+            TextInput:
+                id: text_input
+                size_hint_y: None
+                height: 30
+                multiline: False
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: 1,.1
+            Button:
+                text: 'Cancel'
+                size_hint: .5,1
+                on_press: root.dismiss()
+            Button:
+                text: 'Save'
+                size_hint: .5,1
+                on_release: root.save(filechooser.path, text_input.text)
+
+
+##########################################   SCREENS   #################################################################
+<LoginScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint: 1,.2
+        BoxLayout:
+            size_hint: 1,.4
+            BoxLayout:
+            BoxLayout:
+                BoxLayout:
+                    size_hint: 3, 1
+                    orientation: 'vertical'
+                    Label:
+                        size_hint_y: .1
+                        id: errormsg
+                        text: ''
+                    BoxLayout:
+                        size_hint_y: .9
+                        orientation: 'vertical'
+                        AnchorLayout:
+                            BoxLayout:
+                                Label:
+                                    size_hint: None, None
+                                    size: 150, 30
+                                    text: 'Username'
+                                TextInput:
+                                    size_hint: None, None
+                                    size: 150, 30
+                                    focus: True
+                                    id: user_in
+                                    hint_text: 'username'
+                                    multiline: False
+                                    write_tab: False
+                                    on_text_validate: pass_in.focus = True
+                        AnchorLayout:
+                            BoxLayout:
+                                Label:
+                                    size_hint: None, None
+                                    size: 150, 30
+                                    text: 'Password'
+                                TextInput:
+                                    size_hint: None, None
+                                    size: 150, 30
+                                    id: pass_in
+                                    hint_text: 'password'
+                                    password: True
+                                    multiline: False
+                                    write_tab: False
+                                    on_text_validate: loginbtn.trigger_action()
+            BoxLayout:
+        BoxLayout:
+            size_hint: 1,.3
+        BoxLayout:
+            size_hint: 1,.1
+            Button:
+                text: 'Login'
+                id: loginbtn
+                on_press:
+                    root.login(user_in.text, pass_in.text)
+                    errormsg.text = root.getText()
+
+<MenuScreen>:
+    on_pre_enter: root.welcome_msg(wel, wel_msg)
+    BoxLayout:
+        size_hint: 1,1
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint: 1,.15
+            orientation: 'horizontal'
+            AnchorLayout:
+                id: al
+                size_hint: None,1
+                anchor_x: 'left'
+                anchor_y: 'top'
+                WelcomeBoxLayout:
+                    id: wel
+                    size_hint: None,.5
+                    orientation: 'horizontal'
+                    Label:
+                        id: wel_msg
+            BoxLayout:
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                padding: 0,0,al.width,0
+                Label:
+                    text: 'Menu'
+                    bold: True
+                    font_size: 35
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: .8, .85
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            padding: 10
+            spacing: 10
+            Button:
+                text: 'Reports'
+                font_size: 20
+                on_press: root.manager.transition.direction = 'left'
+                on_press: root.manager.current = 'report'
+            Label:
+                text: 'Lookup Options:'
+                size_hint: root.width, 1
+                pos_hint: {'center_x': 0.15}
+                font_size: 20
+            Button:
+                text: 'JLab Lookup'
+                font_size: 20
+                on_press: root.manager.transition.direction = 'left'
+                on_press: root.manager.current = 'lookup'
+            Button:
+                text: 'Advanced JLab Lookup'
+                font_size: 20
+                on_press: root.manager.transition.direction= 'left'
+                on_press: root.manager.current = 'advanced_lookup'
+            Button:
+                text: 'Advanced Machine Lookup'
+                font_size: 20
+                on_press: root.manager.transition.direction= 'left'
+                on_press: root.manager.current = 'mach_lookup'
+            Label:
+                text: 'Edit/Add:'
+                size_hint: root.width, 1
+                pos_hint: {'center_x': 0.12}
+                font_size: 20
+            Button:
+                text: 'Add New JLab'
+                font_size: 20
+                on_press: root.manager.transition.direction = 'left'
+                on_press: root.manager.current = 'add'
+            Button:
+                text: 'Add new Machine'
+                font_size: 20
+                on_press: root.manager.transition.direction = 'left'
+                on_press: root.manager.current = 'machine'
+            Button:
+                text: 'Link Unattached Machine to JLab'
+                font_size: 20
+                on_press: root.manager.transition.direction = 'left'
+                on_press: root.manager.current = 'link'
+            BoxLayout:
+                size_hint: 1,.5
+            Button:
+                text: 'View History'
+                font_size: 20
+                background_normal: ''
+                background_color: 1,1,1,.15
+                on_press: root.manager.transition.direction = 'left'
+                on_press: root.manager.current = 'history'
+            BoxLayout:
+                size_hint: 1,.5
+
+<ReportScreen>:
+    #treeview: treeview
+    title: "Groups"
+    on_pre_enter: grid.update_buttons(grid)
+    BoxLayout:
+        size_hint: 1,.9
+        pos_hint: {'top':1}
+        orientation: 'horizontal'
+        BoxLayout:
+            size_hint: .3, 1
+            orientation: 'vertical'
+            Label:
+                size_hint: 1,.1
+                text: 'JLab #'
+            BoxLayout:
+                size_hint: 1,.05
+                pos_hint: {'center_y':0.5}
+                orientation: 'vertical'
+                BoxLayout:
+                    size_hint: 1, .075
+                    orientation: 'horizontal'
+                    TextInput:
+                        id: my_user_input
+                        text: ""
+                        write_tab: False
+                        multiline: False
+                    Button:
+                        text: 'Go'
+                        on_release: root.ReadInput()
+            ToggleButton:
+                text: "Unattached Machines"
+                size_hint: 1, .05
+                id: unattached_btn
+            ScrollView:
+                size_hint: 1,.85
+                SelectableGrid:
+                    size: (400,self.getNumJLabs()*35)
+                    size_hint: 1, None
+                    cols: 1
+                    touch_multiselect: True
+                    multiselect: True
+                    id: grid
+                    on: self.make_buttons(grid)
+            Button:
+                size_hint: 1,.05
+                text: 'Select All JLabs'
+                background_color: 1, 1, 1, .55
+                on_press: root.select_all_grid(grid)
+            BoxLayout:
+                size_hint: 1,.01
+        BoxLayout:
+            size_hint: .7, 1
+            orientation: 'vertical'
+            Label:
+                size_hint: 1,.1
+                text: 'JLab Info'
+            MyTreeView:
+                size_hint: 1,.9
+                id: myTV #important
+            Button:
+                size_hint: 1,.05
+                text: 'Select All JLab Info'
+                background_color: 1, 1, 1, .55
+                on_press: root.select_all_TV(myTV)
+            BoxLayout:
+                size_hint: 1,.01
+    BoxLayout:
+        size_hint: 1,.1
+        Button:
+            text: 'Menu'
+            id: menu_btn
+            on_press: root.manager.transition.direction = 'right'
+            on_press: root.manager.current = 'menu'
+        Button:
+            id: clear
+            text: "Clear Selections"
+            on_press: root.popClearSelections(grid, myTV) #call to the clear selections class
+        Button:
+            text: 'Generate Reports'
+            id:rep
+            on_press: root.printReport(unattached_btn)
+
+<LookupScreen>:
+    on_pre_enter:
+        root.refresh_table(-1, oBox1, jbox, mLb, mbox1, grid)
+        grid.update_buttons(grid)
+    BoxLayout:
+        size_hint: 1,.9
+        pos_hint: {'top': 1}
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: .05,1
+            BoxLayout:
+                size_hint: 1,.05
+                Label:
+                    text: 'Jlab #'
+                    font_size: 20
+            BoxLayout:
+                size_hint: 1,.9
+                pos_hint: {'center_y':0.5}
+                orientation: 'vertical'
+                BoxLayout:
+                    size_hint: 1, .075
+                    orientation: 'horizontal'
+                    TextInput:
+                        id: my_user_input
+                        text: ""
+                        write_tab: False
+                        multiline: False
+                    Button:
+                        text: 'Go'
+                        on_release: root.ReadInput()
+                Button:
+                    text: 'Refresh'
+                    on_press: grid.update_buttons(grid)
+                    size_hint: 1,.1
+                ScrollView:
+                    size_hint: 1,.9
+                    SelectableGrid:
+                        size: (400,self.getNumJLabs()*35)
+                        size_hint: 1, None
+                        cols: 1
+                        touch_multiselect: True
+                        multiselect: False
+                        id: grid
+                        on: self.make_buttons(grid)
+        BoxLayout:
+            size_hint: .95, 1
+            id: tab
+            orientation: 'vertical'
+            Label:
+                size_hint: 1,.08
+                text: ''
+                font_size: 20
+            BoxLayout:
+                id: jLb
+                size_hint: 1,.05
+            BoxLayout:
+                size_hint: 1,.05
+                id: box1
+                orientation: 'horizontal'
+                BoxLayout:
+                    id: jbox
+                    orientation: 'horizontal'
+                    on: root.createTable(jbox,jLb)
+            BoxLayout:
+                size_hint: 1,.08
+                padding: 10
+                spacing: 10
+                Label:
+                    text: "Unattached Machines"
+                    font_size: 50
+                    size_hint: .5,1
+            BoxLayout:
+                id: oLb
+                size_hint: 1,.05
+            BoxLayout:
+                id:oBox1
+                size_hint: 1,.05
+                orientation: 'horizontal'
+                BoxLayout:
+                    id: oBox
+                    orientation: 'horizontal'
+                    size_hint: 1,.05
+                    on: root.createOtable(oBox, oLb)
+            Label:
+                size_hint: 1,.08
+                text: 'Machines'
+                font_size: 20
+            BoxLayout:
+                id: mLb
+                size_hint: 1, .05
+            BoxLayout:
+                size_hint: 1 ,.6
+                ScrollView:
+                    BoxLayout:
+                        size: (400,root.getNum()*35)
+                        size_hint: 1, None
+                        id: mbox1
+                        orientation: 'vertical'
+                        BoxLayout:
+                            id: mbox2
+                            orientation: 'horizontal'
+                            size_hint: 1, None
+                            height: self.height
+    BoxLayout:
+        size_hint: 1,.1
+        Button:
+            text: 'Menu'
+            id: menu_btn
+            on_press: root.manager.transition.direction = 'right'
+            on_press: root.manager.current = 'menu'
+        Button:
+            id: clear
+            text: "Clear Selections"
+            on_press: root.deselect(grid)
+        Button:
+            id: free
+            text: 'Back to Unattached Machines'
+            on_press: root.refresh_table(-1, oBox1, jbox, mLb, mbox1, grid)
+        Button:
+            id: rec
+            text: "Write JLab/Machine Changes to Database"
+            on_press: root.write_changes(oBox1, mLb, mbox1, box1, jbox, grid)
+
+# ######################################################################################################################
+<AdvancedLookupScreen>:
+    id: adv
+    BoxLayout:
+        pos_hint: {'top':1}
+        size_hint: 1,.05
+        MyToggleButton:
+            size_hint: .04,1
+            state: 'down'
+            text: 'OR'
+            id: o
+            group: 'or_and'
+        MyToggleButton:
+            size_hint: .04,1
+            text: 'AND'
+            id: a
+            group: 'or_and'
+        MyToggleButton:
+            size_hint: .04,1
+            text: 'NOT'
+            id: n
+            group: 'or_and'
+        Label:
+            size_hint: .8,1
+            text: "Lookup JLabs"
+            font_size: 20
+    TabbedPanel:
+        size_hint: 1, .85
+        pos_hint: {'top': .95}
+        do_default_tab: False
+        TabbedPanelItem:
+            text: 'Search'
+            BoxLayout:
+                orientation: 'vertical'
+                #size_hint: 1,.4
+                #pos_hint: {'top': .95}
+                id: base
+                on: root.makeLevels(base)
+        TabbedPanelItem:
+            text: 'Results'
+            on_press:
+                root.getStuff(base)
+                root.createTable( sbox, sjbox,sjLb,base, o,a,n)
+            BoxLayout:
+                id:new
+                size_hint: 1,1
+                #pos_hint: {'top': .59, 'center_x':0.5}
+                orientation: 'vertical'
+                Label:
+                    size_hint: 1,.1
+                    #text: 'Matching JLabs'
+                    font_size: 25
+                BoxLayout:
+                    id: sjLb
+                    pos_hint: {'top':1}
+                    size_hint: 1,.1
+                ScrollView:
+                    size_hint: 1 , .9
+                    pos_hint: {'bottom':0}
+                    BoxLayout:
+                        id: sbox
+                        size_hint: 1,None
+                        orientation: 'vertical'
+                        BoxLayout:
+                            id: sjbox
+                            size_hint: 1, None
+                            height: self.height
+                            orientation: 'horizontal'
+    BoxLayout:
+        size_hint: 1,.1
+        Button:
+            text: 'Menu'
+            id: menu_btn
+            on_press: root.manager.transition.direction = 'right'
+            on_press: root.manager.current = 'menu'
+        Button:
+            text: "Generate Report"
+            on_press: root.generateReport()
+        Button:
+            id: clear
+            text: "Clear Selections"
+            on_press: root.clearSelections(base,sbox)
+
+# ######################################################################################################################
+<MachineLookupScreen>:
+    id: mlook
+    on: root.getId(mlook)
+    BoxLayout:
+        pos_hint: {'top':1}
+        size_hint: 1,.05
+        MyToggleButton:
+            size_hint: .041,1
+            state: 'down'
+            text: 'OR'
+            id: mo
+            group: 'or_and2'
+        MyToggleButton:
+            size_hint: .041,1
+            text: 'AND'
+            id: ma
+            group: 'or_and2'
+        MyToggleButton:
+            size_hint: .041,1
+            text: 'NOT'
+            id: mn
+            group: 'or_and2'
+        Label:
+            size_hint: .8,1
+            text: "Lookup Machines by selected fields"
+            font_size: 20
+    TabbedPanel:
+        size_hint: 1, .85
+        pos_hint: {'top':.95}
+        do_default_tab: False
+        TabbedPanelItem:
+            text: 'search'
+            BoxLayout:
+                orientation: 'vertical'
+                #size_hint: 1,.55
+                #pos_hint: {'top': .95}
+                id: mbase
+                on: root.makeLevels(mbase)
+        TabbedPanelItem:
+            text: 'results'
+            on_press:
+                root.getMStuff(mbase)
+                root.createMTable(mbox, smbox, smLb, mbase, mo, ma, mn)
+            BoxLayout:
+                id:new_m
+                #size_hint: .9,.325
+                #pos_hint: {'top': .425, 'center_x':0.5}
+                orientation: 'vertical'
+                Label:
+                    size_hint: 1,.1
+                    font_size: 25
+                BoxLayout:
+                    id: smLb
+                    pos_hint: {'top':1}
+                    size_hint: 1,.1
+                ScrollView:
+                    size_hint: 1 , .9
+                    pos_hint: {'bottom':0}
+                    BoxLayout:
+                        id: mbox
+                        size_hint: 1,None
+                        orientation: 'vertical'
+                        BoxLayout:
+                            id: smbox
+                            size_hint: 1, None
+                            height: self.height
+                            orientation: 'horizontal'
+    BoxLayout:
+        size_hint: 1,.1
+        Button:
+            text: 'Menu'
+            id: menu_btn
+            on_press: root.manager.transition.direction = 'right'
+            on_press: root.manager.current = 'menu'
+        Button:
+            text: "Generate Report"
+            on_press: root.generateReport()
+        Button:
+            id: clear
+            text: "Clear Selections"
+            on_press: root.clearSelections(mbase, mbox, smbox)
+# ######################################################################################################################
+<AddScreen>:
+    id: addS
+    BoxLayout:
+        orientation: 'vertical'
+        id: boxA
+        size_hint: 1,1
+        Label:
+            size_hint: 1, .1
+            pos_hint: {'top':1}
+            text: 'Create a JLab'
+        BoxLayout:
+            id: boxB
+            size_hint: 1, .6
+            orientation: 'vertical'
+            on: root.createLayout(boxB)
+        BoxLayout:
+            size_hint: 1, .1
+            orientation: 'horizontal'
+            Label:
+                text: 'Status'
+            BoxLayout:
+                size_hint: 1, 1
+                padding: 10
+                spacing: 10
+                MyToggleButton:
+                    id: act
+                    text: 'ACTIVE'
+                    state: 'down'
+                    group: 'status'
+                MyToggleButton:
+                    id: inact
+                    text: 'INACTIVE'
+                    group: 'status'
+        BoxLayout:
+            size_hint: 1, .1
+            orientation: 'horizontal'
+            Label:
+                text: 'Owner'
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: 1, 1
+                Button:
+                    size_hint: .3, 1
+                    text: 'Select'
+                    on_release: root.popOwnerProgram()
+                BoxLayout:
+                    size_hint: .2, 1
+                    orientation: 'vertical'
+                    Label:
+                        text: 'Name:'
+                    Label:
+                        text: 'Email:'
+                    Label:
+                        text: 'Number:'
+                BoxLayout:
+                    size_hint: .5, 1
+                    orientation: 'vertical'
+                    id: ow
+                    Label:
+                        id: nameLabel
+                        text: ''
+                    Label:
+                        text: ''
+                    Label:
+                        text: ''
+        BoxLayout:
+            size_hint: 1,.1
+            Button:
+                text: 'Menu'
+                on_press: root.manager.transition.direction = 'right'
+                on_press: root.manager.current = 'menu'
+            Button:
+                text: 'Add JLab'
+                on_press:
+                    root.useInputs(boxB, ow, act, inact)
+                id: add_btn
+            Button:
+                text: 'Clear All'
+                id: clear
+                on_press: root.clearInputs(boxB,ow)
+
+#######################################################################################################################
+<MachineScreen>:
+    on_pre_enter: grid.update_buttons(grid)
+    BoxLayout:
+        size_hint: 1,.9
+        orientation: 'vertical'
+        pos_hint: {'center_x': .5, 'top':1}
+        id: boxA
+        BoxLayout:
+            BoxLayout:
+                size_hint: .1,1
+                orientation: 'vertical'
+                Label:
+                    size_hint: 1,.1
+                    text: 'JLab #'
+                BoxLayout:
+                    size_hint: 1,.06
+                    pos_hint: {'center_y':0.5}
+                    orientation: 'vertical'
+                    BoxLayout:
+                        size_hint: 1, .075
+                        orientation: 'horizontal'
+                        TextInput:
+                            id: my_user_input
+                            text: ""
+                            write_tab: False
+                            multiline: False
+                        Button:
+                            text: 'Go'
+                            on_release: root.ReadInput()
+                Button:
+                    text: 'NONE'
+                    size_hint: 1,.05
+                    on_press: root.set_to_none(grid)
+                ScrollView:
+                    size_hint: 1,.85
+                    SelectableGrid:
+                        size: (400,self.getNumJLabs()*35)
+                        size_hint: 1, None
+                        cols: 1
+                        touch_multiselect: True
+                        multiselect: False
+                        id: grid
+                        on: self.make_buttons(grid)
+            BoxLayout:
+                size_hint: .9,1
+                orientation: 'vertical'
+                Label:
+                    size_hint: 1,.1
+                    text: 'New Machine Info'
+                BoxLayout:
+                    size_hint: 1,.9
+                    id: boxB
+                    orientation: 'vertical'
+                    on: root.createLayout(boxB)
+                BoxLayout:
+                    size_hint: 1, .15
+                    orientation: 'horizontal'
+                    Label:
+                        text: 'Status'
+                    BoxLayout:
+                        size_hint: 1, 1
+                        padding: 10
+                        spacing: 10
+                        MyToggleButton:
+                            id: act
+                            text: 'ACTIVE'
+                            state: 'down'
+                            group: 'status'
+                        MyToggleButton:
+                            id: inact
+                            text: 'INACTIVE'
+                            group: 'status'
+    BoxLayout:
+        size_hint: 1, .1
+        Button:
+            text: 'Menu'
+            on_press: root.manager.transition.direction = 'right'
+            on_press: root.manager.current = 'menu'
+        Button:
+            text: 'Add Machine'
+            id: addMbtn
+            on_press: root.addMachine(boxB,act,inact)
+        Button:
+            text: 'Clear All'
+            id:clearMbtn
+            on_press: root.clearInputs(boxB)
+#######################################################################################################################
+<LinkScreen>:
+    on_pre_enter:
+        root.createLayout(box)
+        grid.update_buttons(grid)
+    BoxLayout:
+        size_hint: 1,.9
+        orientation: 'vertical'
+        pos_hint: {'center_x': .5, 'top':1}
+        id: box1
+        BoxLayout:
+            BoxLayout:
+                size_hint: .05,1
+                orientation: 'vertical'
+                Label:
+                    size_hint: 1,.1
+                    text: 'JLab #'
+                BoxLayout:
+                    size_hint: 1, .075
+                    orientation: 'horizontal'
+                    TextInput:
+                        id: my_user_input
+                        text: ""
+                        write_tab: False
+                        multiline: False
+                    Button:
+                        text: 'Go'
+                        on_release: root.ReadInput()
+                ScrollView:
+                    size_hint: 1,.85
+                    SelectableGrid:
+                        size: (400,self.getNumJLabs()*35)
+                        size_hint: 1, None
+                        cols: 1
+                        touch_multiselect: True
+                        multiselect: False
+                        id: grid
+                        on: self.make_buttons(grid)
+            BoxLayout:
+                size_hint: .95,1
+                orientation: 'vertical'
+                Label:
+                    size_hint: 1,.1
+                    text: 'Unattached Machine Info'
+                BoxLayout:
+                    size_hint: 1,.9
+                    id: box
+                    orientation: 'vertical'
+                    on: root.createLayout(box)
+    BoxLayout:
+        size_hint: 1, .1
+        Button:
+            text: 'Menu'
+            on_press: root.manager.transition.direction = 'right'
+            on_press: root.manager.current = 'menu'
+        Button:
+            text: 'Clear All'
+            id:clearBtn
+            on_press: root.clearInputs(grid,box)
+        Button:
+            text: 'Link Machine(s)'
+            id: linkBtn
+            on_press: root.linkMachine(box, grid)
+
+#######################################################################################################################
+
+<HistoryScreen>:
+    on_pre_enter: root.create_history_table(-1,hBox,hLb,j_grid,"")
+    BoxLayout:
+        size_hint: 1,.9
+        pos_hint: {'top': 1}
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: .15,1
+            BoxLayout:
+                size_hint: 1,.1
+                Label:
+                    text: 'Jlab #'
+                    font_size: 20
+            BoxLayout:
+                size_hint: 1,.55
+                pos_hint: {'center_y':0.5}
+                orientation: 'vertical'
+                Button:
+                    text: 'Update JLabs'
+                    on_press: j_grid.update_buttons(j_grid)
+                    size_hint: 1,.1
+                Button:
+                    text: 'NONE'
+                    size_hint: 1,.1
+                    on_press: root.set_j_to_none(j_grid, u_grid)
+                    on_release: root.create_history_table(-1,hBox,hLb,j_grid,"")
+                ScrollView:
+                    size_hint: 1,.8
+                    SelectableGrid:
+                        size: (400,self.getNumJLabs()*35)
+                        size_hint: 1, None
+                        cols: 1
+                        touch_multiselect: True
+                        multiselect: False
+                        id: j_grid
+                        on: self.make_buttons(j_grid)
+            BoxLayout:
+                size_hint: 1,.1
+                padding: 0,15,0,0
+                Label:
+                    text: 'User'
+                    font_size: 15
+            BoxLayout:
+                size_hint: 1,.28
+                pos_hint: {'center_y':0.5}
+                orientation: 'vertical'
+                Button:
+                    text: 'All Users'
+                    size_hint: 1,.2
+                    on_press: u_grid.deselect_all_nodes(u_grid)
+
+                ScrollView:
+                    size_hint: 1,.8
+                    UserSelectableGrid:
+                        size: (400,self.get_num_users()*35)
+                        size_hint: 1, None
+                        cols: 1
+                        touch_multiselect: True
+                        multiselect: False
+                        id: u_grid
+                        on: self.make_user_buttons(u_grid)
+        BoxLayout:
+            size_hint: .85, 1
+            orientation: 'vertical'
+            Label:
+                id: hist_title
+                size_hint: 1,.1
+                text: 'History'
+                font_size: 25
+            BoxLayout:
+                id: hLb
+                size_hint: 1,.05
+            ScrollView:
+                BoxLayout:
+                    size_hint: 1, None
+                    id: hBox
+                    orientation: 'vertical'
+                    BoxLayout:
+                        id: hBoxC
+                        orientation: 'horizontal'
+                        size_hint: 1, None
+                        height: self.height
+    BoxLayout:
+        size_hint: 1,.1
+        Button:
+            text: 'Menu'
+            id: menu_btn
+            on_press: root.manager.transition.direction = 'right'
+            on_press: root.manager.current = 'menu'
